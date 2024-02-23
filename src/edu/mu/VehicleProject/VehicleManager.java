@@ -14,6 +14,10 @@ public class VehicleManager {
 	
 	private static final String vehicleFilePath = "vehicleList.csv";
 	private ArrayList<Vehicle> inventory;
+	private double calculateMaintenaceCost;
+	private double calculateFuelEfficiency;
+	private final static double distance = 300;
+	private final static double fuelPrice = 3.25;
 	
 	
 	// Initialization of singleton
@@ -60,6 +64,47 @@ public class VehicleManager {
 		}
 		
 		
+	}
+//	This will display the information, including maintenance cost, fuel efficiency, and how 
+//	the vehicle starts, of all the cars present in the vehicleList.
+//	If the vehicle is not found, then print an appropriate error message.
+	public void displayAllCarInformation() {
+		System.out.println("\u001B[31m"+"The following are all Cars:"+"\u001B[0m");
+		for(Vehicle car : inventory) {
+			if(car instanceof Car) {
+				System.out.println("\nCar Brand : " + car.getBrand()+"\nMaintenance Cost : " +car.calculateMaintenaceCost(distance) + " \nFuelEfficiency Cost: "+car.calculateFuelEfficiency(distance, fuelPrice));
+				car.startEngine(); 
+			}
+		}
+	}
+	public void displayAllTruckInformation() {
+		System.out.println("\u001B[31m"+"\n\nThe following are all Trucks:"+"\u001B[0m");
+		for(Vehicle Truck : inventory) {
+			if(Truck instanceof Truck) {
+				System.out.println("\nCar Brand : " + Truck.getBrand()+"\nMaintenance Cost : " +Truck.calculateMaintenaceCost(distance) + " \nFuelEfficiency Cost: "+Truck.calculateFuelEfficiency(distance, fuelPrice));
+				Truck.startEngine(); 
+			}
+		}
+	}
+
+	public void displayAllSUVInformation() {
+		System.out.println("\u001B[31m"+"\n\nThe following are all SUVS:"+"\u001B[0m");
+		for(Vehicle SUV : inventory) {
+			if(SUV instanceof Truck) {
+				System.out.println("\nCar Brand : " + SUV.getBrand()+"\nMaintenance Cost : " +SUV.calculateMaintenaceCost(distance) + " \nFuelEfficiency Cost: "+SUV.calculateFuelEfficiency(distance, fuelPrice));
+				SUV.startEngine(); 
+			}
+		}
+	}
+
+	public void displayAllMotorBikeInformation() {
+		System.out.println("\u001B[31m"+"\n\nThe following are all MotorBikes:"+"\u001B[0m");
+		for(Vehicle MotorBike : inventory) {
+			if(MotorBike instanceof Truck) {
+				System.out.println("\nCar Brand : " + MotorBike.getBrand()+"\nMaintenance Cost : " +MotorBike.calculateMaintenaceCost(distance) + " \nFuelEfficiency Cost: "+MotorBike.calculateFuelEfficiency(distance, fuelPrice));
+				MotorBike.startEngine(); 
+			}
+		}
 	}
 
 
