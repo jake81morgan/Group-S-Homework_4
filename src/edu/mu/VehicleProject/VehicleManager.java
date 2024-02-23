@@ -81,7 +81,7 @@ public class VehicleManager {
 		System.out.println("\u001B[31m"+"\n\nThe following are all Trucks:"+"\u001B[0m");
 		for(Vehicle Truck : inventory) {
 			if(Truck instanceof Truck) {
-				System.out.println("\nCar Brand : " + Truck.getBrand()+"\nMaintenance Cost : " +Truck.calculateMaintenaceCost(distance) + " \nFuelEfficiency Cost: "+Truck.calculateFuelEfficiency(distance, fuelPrice));
+				System.out.println("\nTruck Brand : " + Truck.getBrand()+"\nMaintenance Cost : " +Truck.calculateMaintenaceCost(distance) + " \nFuelEfficiency Cost: "+Truck.calculateFuelEfficiency(distance, fuelPrice));
 				Truck.startEngine(); 
 			}
 		}
@@ -90,8 +90,8 @@ public class VehicleManager {
 	public void displayAllSUVInformation() {
 		System.out.println("\u001B[31m"+"\n\nThe following are all SUVS:"+"\u001B[0m");
 		for(Vehicle SUV : inventory) {
-			if(SUV instanceof Truck) {
-				System.out.println("\nCar Brand : " + SUV.getBrand()+"\nMaintenance Cost : " +SUV.calculateMaintenaceCost(distance) + " \nFuelEfficiency Cost: "+SUV.calculateFuelEfficiency(distance, fuelPrice));
+			if(SUV instanceof SUV) {
+				System.out.println("\nSUV Brand : " + SUV.getBrand()+"\nMaintenance Cost : " +SUV.calculateMaintenaceCost(distance) + " \nFuelEfficiency Cost: "+SUV.calculateFuelEfficiency(distance, fuelPrice));
 				SUV.startEngine(); 
 			}
 		}
@@ -100,11 +100,46 @@ public class VehicleManager {
 	public void displayAllMotorBikeInformation() {
 		System.out.println("\u001B[31m"+"\n\nThe following are all MotorBikes:"+"\u001B[0m");
 		for(Vehicle MotorBike : inventory) {
-			if(MotorBike instanceof Truck) {
-				System.out.println("\nCar Brand : " + MotorBike.getBrand()+"\nMaintenance Cost : " +MotorBike.calculateMaintenaceCost(distance) + " \nFuelEfficiency Cost: "+MotorBike.calculateFuelEfficiency(distance, fuelPrice));
+			if(MotorBike instanceof MotorBike) {
+				System.out.println("\nMotorbike Brand : " + MotorBike.getBrand()+"\nMaintenance Cost : " +MotorBike.calculateMaintenaceCost(distance) + " \nFuelEfficiency Cost: "+MotorBike.calculateFuelEfficiency(distance, fuelPrice));
 				MotorBike.startEngine(); 
 			}
 		}
+	}
+	
+	public void displayVehicleInformation(Vehicle v) {
+		if(inventory.contains(v)) {
+			if (v instanceof Car) {
+	            Car car = (Car) v;
+	            System.out.println("\nCar Brand: " + car.getBrand());
+	            System.out.println("Maintenance Cost: " + car.calculateMaintenaceCost(distance));
+	            System.out.println("Fuel Efficiency: " + car.calculateFuelEfficiency(distance, fuelPrice));
+	            car.startEngine();
+	        } else if (v instanceof Truck) {
+	            Truck truck = (Truck) v;
+	            System.out.println("\nTruck Brand: " + truck.getBrand());
+	            System.out.println("Maintenance Cost: " + truck.calculateMaintenaceCost(distance));
+	            System.out.println("Fuel Efficiency: " + truck.calculateFuelEfficiency(distance, fuelPrice));
+	            truck.startEngine();
+	        } else if (v instanceof SUV) {
+	            SUV suv = (SUV) v;
+	            System.out.println("\nSUV Brand: " + suv.getBrand());
+	            System.out.println("Maintenance Cost: " + suv.calculateMaintenaceCost(distance));
+	            System.out.println("Fuel Efficiency: " + suv.calculateFuelEfficiency(distance, fuelPrice));
+	            suv.startEngine();
+	        } else if (v instanceof MotorBike) {
+	            MotorBike motorBike = (MotorBike) v;
+	            System.out.println("\nMotorBike Brand: " + motorBike.getBrand());
+	            System.out.println("Maintenance Cost: " + motorBike.calculateMaintenaceCost(distance));
+	            System.out.println("Fuel Efficiency: " + motorBike.calculateFuelEfficiency(distance, fuelPrice));
+	            motorBike.startEngine();
+	        } else {
+	        	System.out.println("\nUnknown vehicle type.");
+	        }
+		} else {
+			System.out.println("\nError: Vehicle not found in inventory");
+		}
+		
 	}
 
 
