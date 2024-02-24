@@ -8,7 +8,7 @@ public class Main {
 	
 
 	public static void main(String[] args) {
-		VehicleManager manager = new VehicleManager();
+		VehicleManager manager = VehicleManager.getInstance();
 
         // Initialize stock from file
         boolean initialized = manager.initializeStock();

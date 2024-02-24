@@ -15,6 +15,7 @@ import edu.mu.VehicleProject.enums.VehicleColor;
 
 public class VehicleManager {
 
+	private static VehicleManager instance = null;
 	private static final String vehicleFilePath = "vehicleList.csv";
 	private ArrayList<Vehicle> inventory;
 	private double calculateMaintenaceCost;
@@ -23,6 +24,16 @@ public class VehicleManager {
 	private final static double fuelPrice = 3.25;
 
 	// Initialization of singleton
+	private VehicleManager() {
+		
+	}
+	
+	public static VehicleManager getInstance() {
+		if(instance == null) {
+			instance = new VehicleManager();
+		}
+		return instance;
+	}
 
 	// Initializes vehicle stock from file
 	public boolean initializeStock() {
