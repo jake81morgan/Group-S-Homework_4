@@ -287,24 +287,77 @@ public class VehicleManager {
         return vehicleWithHighestMaintenanceCost;
 	}
 
-////Calculate the maintenance cost for each vehicle in the vehicle list and return the vehicle with the lowest maintenance cost. 
-////If multiple vehicles have the same maintenance cost, randomly return one of the vehicles (Use the
-//	public Vehicle getVehicleWithLowestMaintenanceCost(double distance) {
-//
-//	}
-//
-////Calculate the fuel efficiencies for each vehicle in the vehicle list and return the vehicle with the highest fuel efficiency. 
-////If multiple vehicles have the same highest fuel efficiency, return vehicles with the same highest fuel efficiency in an ArrayList.
-//	public ArrayList<Vehicle> getVehicleWithHighestFuelEfficiency(double distance, double fuelPrice) {
-//
-//	}
-//
-////Calculate the fuel efficiencies for each vehicle in the vehicle list and return the vehicle with the lowest fuel efficiency. 
-////If multiple vehicles have the same lowest fuel efficiency, return vehicles with the same lowest fuel efficiency in an ArrayList.
-//	public ArrayList<Vehicle> getVehicleWithLowestFuelEfficiency(double distance, double fuelPrice) {
-//
-//	}
-//
+//Calculate the maintenance cost for each vehicle in the vehicle list and return the vehicle with the lowest maintenance cost. 
+//If multiple vehicles have the same maintenance cost, randomly return one of the vehicles (Use the
+	public Vehicle getVehicleWithLowestMaintenanceCost(double distance) {
+		if (inventory.isEmpty()) {
+            return null; // Return null if the list is empty
+        }
+
+        Vehicle vehicleWithLowestMaintenanceCost = null;
+        double lowestMaintenanceCost = Double.MAX_VALUE;
+
+        for (Vehicle vehicle : inventory) {
+            double maintenanceCost = vehicle.calculateMaintenaceCost(distance);
+            if (maintenanceCost < lowestMaintenanceCost) {
+                lowestMaintenanceCost = maintenanceCost;
+                vehicleWithLowestMaintenanceCost = vehicle;
+            }
+        }
+
+        return vehicleWithLowestMaintenanceCost;
+	}
+
+//Calculate the fuel efficiencies for each vehicle in the vehicle list and return the vehicle with the highest fuel efficiency. 
+//If multiple vehicles have the same highest fuel efficiency, return vehicles with the same highest fuel efficiency in an ArrayList.
+	public ArrayList<Vehicle> getVehicleWithHighestFuelEfficiency(double distance, double fuelPrice) {
+		if (inventory.isEmpty()) {
+            return null; // Return null if the list is empty
+        }
+
+        ArrayList<Vehicle> vehiclesWithHighestFuelEfficiency = new ArrayList<>();
+        double highestFuelEfficiency = Double.MIN_VALUE;
+
+        // Calculate the fuel efficiency for each vehicle
+        for (Vehicle vehicle : inventory) {
+            double fuelEfficiency = vehicle.calculateFuelEfficiency(distance, fuelPrice);
+            if (fuelEfficiency > highestFuelEfficiency) {
+                highestFuelEfficiency = fuelEfficiency;
+                vehiclesWithHighestFuelEfficiency.clear();
+                vehiclesWithHighestFuelEfficiency.add(vehicle);
+            } else if (fuelEfficiency == highestFuelEfficiency) {
+                vehiclesWithHighestFuelEfficiency.add(vehicle);
+            }
+        }
+
+        return vehiclesWithHighestFuelEfficiency;
+	}
+
+//Calculate the fuel efficiencies for each vehicle in the vehicle list and return the vehicle with the lowest fuel efficiency. 
+//If multiple vehicles have the same lowest fuel efficiency, return vehicles with the same lowest fuel efficiency in an ArrayList.
+	public ArrayList<Vehicle> getVehicleWithLowestFuelEfficiency(double distance, double fuelPrice) {
+		if (inventory.isEmpty()) {
+            return null; // Return null if the list is empty
+        }
+
+        ArrayList<Vehicle> vehiclesWithLowestFuelEfficiency = new ArrayList<>();
+        double lowestFuelEfficiency = Double.MAX_VALUE;
+
+        // Calculate the fuel efficiency for each vehicle
+        for (Vehicle vehicle : inventory) {
+            double fuelEfficiency = vehicle.calculateFuelEfficiency(distance, fuelPrice);
+            if (fuelEfficiency < lowestFuelEfficiency) {
+                lowestFuelEfficiency = fuelEfficiency;
+                vehiclesWithLowestFuelEfficiency.clear();
+                vehiclesWithLowestFuelEfficiency.add(vehicle);
+            } else if (fuelEfficiency == lowestFuelEfficiency) {
+                vehiclesWithLowestFuelEfficiency.add(vehicle);
+            }
+        }
+
+        return vehiclesWithLowestFuelEfficiency;
+	}
+
 ////Calculate the average/mean of the fuel efficiency of SUVs in the vehicle list. 
 //	public double getAverageFuelEfficiencyOfSUVs(double distance, double fuelPrice) {
 //
