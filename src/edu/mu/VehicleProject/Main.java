@@ -27,17 +27,5 @@ public class Main {
 //		for(Vehicle vehicle : vehicles) {
 //			System.out.println(vehicle);
 //		}
-		
-		// Displays the information for the first MotorBike in the inventory
-		Vehicle testcar = null;
-		ArrayList<Vehicle> inventory = manager.getInventory();
-		for( Vehicle v : inventory) {
-			if( v instanceof MotorBike) {
-				testcar = v;
-				break;
-			}
-		}
-		manager.displayVehicleInformation(testcar);
-		
 	}
 }
