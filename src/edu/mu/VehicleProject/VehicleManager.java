@@ -1,9 +1,13 @@
 package edu.mu.VehicleProject;
 
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 import edu.mu.VehicleProject.Vehicles.*;
 import edu.mu.VehicleProject.enums.FuelType;
@@ -70,45 +74,70 @@ public class VehicleManager {
 //	If the vehicle is not found, then print an appropriate error message.
 	public void displayAllCarInformation() {
 		System.out.println("\u001B[31m"+"The following are all Cars:"+"\u001B[0m");
+		int count = 0;
 		for(Vehicle car : inventory) {
 			if(car instanceof Car) {
 				System.out.println("\nCar Brand : " + car.getBrand()+"\nMaintenance Cost : " +car.calculateMaintenaceCost(distance) + " \nFuelEfficiency Cost: "+car.calculateFuelEfficiency(distance, fuelPrice));
 				car.startEngine(); 
+				count++;
 			}
+		}
+		//Print an error message if there is no cars
+		if(count == 0) {
+			System.out.println("There was not a Car in the list");
 		}
 	}
 	public void displayAllTruckInformation() {
 		System.out.println("\u001B[31m"+"\n\nThe following are all Trucks:"+"\u001B[0m");
+		int count = 0;
 		for(Vehicle Truck : inventory) {
 			if(Truck instanceof Truck) {
 				System.out.println("\nTruck Brand : " + Truck.getBrand()+"\nMaintenance Cost : " +Truck.calculateMaintenaceCost(distance) + " \nFuelEfficiency Cost: "+Truck.calculateFuelEfficiency(distance, fuelPrice));
 				Truck.startEngine(); 
+				count++;
 			}
 		}
+		//Print an error message if there is no Truck
+		if(count == 0) {
+			System.out.println("There was not a Truck in the list");
+		}		
 	}
 
 	public void displayAllSUVInformation() {
 		System.out.println("\u001B[31m"+"\n\nThe following are all SUVS:"+"\u001B[0m");
+		int count = 0;
 		for(Vehicle SUV : inventory) {
 			if(SUV instanceof SUV) {
 				System.out.println("\nSUV Brand : " + SUV.getBrand()+"\nMaintenance Cost : " +SUV.calculateMaintenaceCost(distance) + " \nFuelEfficiency Cost: "+SUV.calculateFuelEfficiency(distance, fuelPrice));
 				SUV.startEngine(); 
+				count++;
 			}
+		}
+		//Print an error message if there is no SUV
+		if(count == 0) {
+			System.out.println("There was not a SUV in the list");
 		}
 	}
 
 	public void displayAllMotorBikeInformation() {
 		System.out.println("\u001B[31m"+"\n\nThe following are all MotorBikes:"+"\u001B[0m");
+		int count = 0;
 		for(Vehicle MotorBike : inventory) {
 			if(MotorBike instanceof MotorBike) {
 				System.out.println("\nMotorbike Brand : " + MotorBike.getBrand()+"\nMaintenance Cost : " +MotorBike.calculateMaintenaceCost(distance) + " \nFuelEfficiency Cost: "+MotorBike.calculateFuelEfficiency(distance, fuelPrice));
 				MotorBike.startEngine(); 
+				count++;
 			}
+		}
+		//Print an error message if there is no Motorbike
+		if(count == 0) {
+			System.out.println("There was not a Motorbike in the list");
 		}
 	}
 	
 	public void displayVehicleInformation(Vehicle v) {
 		if(inventory.contains(v)) {
+			System.out.println("\u001B[31m"+"\n\nThe following test vehicle was given with the following information:"+"\u001B[0m");
 			if (v instanceof Car) {
 	            Car car = (Car) v;
 	            System.out.println("\nCar Brand: " + car.getBrand());
@@ -140,6 +169,53 @@ public class VehicleManager {
 			System.out.println("\nError: Vehicle not found in inventory");
 		}
 		
+	}
+	
+	//Removes the given vehicle from the vehicleList
+	//Returns true if the removal is successful, false otherwise.
+	public boolean removeVehicle(Vehicle V) {
+		return inventory.remove(V);
+	}
+	
+	//adds  the given vehicle from the vehicleList
+	//Returns true if the addition is successful, false otherwise.
+	public boolean addVehicle(Vehicle V) {
+		return inventory.add(V);
+	}
+	
+	//Saves the updated vehicleList back to the CSV file located at vehicleFilePath. Overwrites the existing file with the updated data.
+	//Returns true if the saving is successful, false otherwise (file does not exist, or file empty).
+	public boolean saveVehicleList() {
+		try {
+			
+			// Initializes writer and creates header of file
+			BufferedWriter writer = new BufferedWriter(new FileWriter(vehicleFilePath));
+			writer.write("Type,Title,Price,Year,Genre");
+            writer.newLine();
+
+        	// Adds products to CSV file
+            for(Vehicle vehicle : inventory) {
+            	if(vehicle instanceof Car) {
+            		writer.write("Car");
+            	} else if (vehicle instanceof Truck) {
+            		writer.write("Truck");
+            	} else if (vehicle instanceof SUV) {
+            		writer.write("SUV");
+            	} else if (vehicle instanceof MotorBike) {
+            		writer.write("MotorBike");
+            	}
+            	writer.write("," + vehicle.getBrand()+ ","  + vehicle.getMake()+ "," + vehicle.getModelYear() + "," + vehicle.getPrice() + "," + vehicle.getColor() + "," + vehicle.getFuelType()+ "," + vehicle.getMileage()+ "," + vehicle.getMass()+ "," + vehicle.getCylinders()+ "," + vehicle.getGasTankCapacity()+ "," + vehicle.getStartType());
+            	writer.newLine(); // Moves to next line
+            	
+            }
+
+            // Close the writer
+            writer.close();
+			return true;
+		} catch (IOException e) {
+			System.out.println("File write error.");
+			return false;
+		} 
 	}
 
 
