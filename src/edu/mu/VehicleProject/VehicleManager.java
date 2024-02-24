@@ -248,24 +248,45 @@ public class VehicleManager {
 		}
 	}
 
-////Checks if the given vehicle is a specific type of Vehicle subclass.
-////If the given vehicle object is the object type, then return true, otherwise return false.
-//	private boolean isVehicleType(Vehicle v, Class clazz) {
-//
-//	}
-//
-////Returns the number of objects in the vehicle list based on the object vehicle type.
-////Use the isVehicleType(Vehicle v, Class clazz) method.
-//	public int getNumberOfVehiclesByType(Class clazz) {
-//
-//	}
-//
-////Calculate the maintenance cost for each vehicle in the vehicle list and return the vehicle with the highest maintenance cost.
-////If multiple vehicles have the same maintenance cost, randomly return one of the
-//	public Vehicle getVehicleWithHighestMaintenanceCost(double distance) {
-//
-//	}
-//
+//Checks if the given vehicle is a specific type of Vehicle subclass.
+//If the given vehicle object is the object type, then return true, otherwise return false.
+	private boolean isVehicleType(Vehicle v, Class clazz) {
+		return clazz.isInstance(v);
+	}
+
+//Returns the number of objects in the vehicle list based on the object vehicle type.
+//Use the isVehicleType(Vehicle v, Class clazz) method.
+	public int getNumberOfVehiclesByType(Class clazz) {
+		int count = 0;
+		for(Vehicle vehicle : inventory) {
+			if(isVehicleType(vehicle, clazz)) {
+				count++;
+			}	
+		}
+		return count;
+	}
+
+//Calculate the maintenance cost for each vehicle in the vehicle list and return the vehicle with the highest maintenance cost.
+//If multiple vehicles have the same maintenance cost, randomly return one of the
+	public Vehicle getVehicleWithHighestMaintenanceCost(double distance) {
+		if (inventory.isEmpty()) {
+            return null; // Return null if the list is empty
+        }
+
+        Vehicle vehicleWithHighestMaintenanceCost = null;
+        double highestMaintenanceCost = Double.MIN_VALUE;
+
+        for (Vehicle vehicle : inventory) {
+            double maintenanceCost = vehicle.calculateMaintenaceCost(distance);
+            if (maintenanceCost > highestMaintenanceCost) {
+                highestMaintenanceCost = maintenanceCost;
+                vehicleWithHighestMaintenanceCost = vehicle;
+            }
+        }
+
+        return vehicleWithHighestMaintenanceCost;
+	}
+
 ////Calculate the maintenance cost for each vehicle in the vehicle list and return the vehicle with the lowest maintenance cost. 
 ////If multiple vehicles have the same maintenance cost, randomly return one of the vehicles (Use the
 //	public Vehicle getVehicleWithLowestMaintenanceCost(double distance) {
