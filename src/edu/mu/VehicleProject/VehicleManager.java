@@ -358,10 +358,21 @@ public class VehicleManager {
         return vehiclesWithLowestFuelEfficiency;
 	}
 
-////Calculate the average/mean of the fuel efficiency of SUVs in the vehicle list. 
-//	public double getAverageFuelEfficiencyOfSUVs(double distance, double fuelPrice) {
-//
-//	}
+//Calculate the average/mean of the fuel efficiency of SUVs in the vehicle list. 
+	public double getAverageFuelEfficiencyOfSUVs(double distance, double fuelPrice) {
+		int suvCount = getNumberOfVehiclesByType(SUV.class);
+        if (suvCount == 0) {
+            return -1.0; // Error code indicating no SUVs in the list
+        }
+
+        double totalFuelEfficiency = 0.0;
+        for (Vehicle vehicle : inventory) {
+            if (vehicle instanceof SUV) {
+                totalFuelEfficiency += vehicle.calculateFuelEfficiency(distance, fuelPrice);
+            }
+        }
+        return totalFuelEfficiency / suvCount;
+	}
 
 	public ArrayList<Vehicle> getInventory() {
 		return inventory;
