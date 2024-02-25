@@ -43,6 +43,21 @@ public abstract class Vehicle {
 		
 	}
 	
+	// Copy constructor
+	public Vehicle(Vehicle other) {
+		this.brand = other.brand;
+		this.make = other.make;
+		this.modelYear = other.modelYear;
+		this.price = other.price;
+		this.color = other.color;
+		this.fuelType = other.fuelType;
+		this.mileage = other.mileage;
+		this.mass = other.mass;
+		this.cylinders = other.cylinders;
+		this.gasTankCapacity = other.gasTankCapacity;
+		this.startType = other.startType;
+	}
+	
 	// Getters and Setters
 	public String getBrand() {
 		return brand;
