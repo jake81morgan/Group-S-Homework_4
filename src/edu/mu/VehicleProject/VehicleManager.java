@@ -1,17 +1,9 @@
 package edu.mu.VehicleProject;
 
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
+import java.io.*;
+import java.util.*;
 import edu.mu.VehicleProject.Vehicles.*;
-import edu.mu.VehicleProject.enums.FuelType;
-import edu.mu.VehicleProject.enums.StartMechanism;
-import edu.mu.VehicleProject.enums.VehicleColor;
+import edu.mu.VehicleProject.enums.*;
 
 public class VehicleManager {
 
