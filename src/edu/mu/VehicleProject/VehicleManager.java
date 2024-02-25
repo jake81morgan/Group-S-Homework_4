@@ -18,8 +18,6 @@ public class VehicleManager {
 	private static VehicleManager instance = null;
 	private static final String vehicleFilePath = "vehicleList.csv";
 	private ArrayList<Vehicle> inventory;
-	private double calculateMaintenaceCost;
-	private double calculateFuelEfficiency;
 	private final static double distance = 300;
 	private final static double fuelPrice = 3.25;
 
@@ -217,7 +215,7 @@ public class VehicleManager {
 
 			// Initializes writer and creates header of file
 			BufferedWriter writer = new BufferedWriter(new FileWriter(vehicleFilePath));
-			writer.write("Type,Title,Price,Year,Genre");
+			writer.write("Type,Model,Make,ModelYear,Price,Color,FuelType,Mileage,Mass,Cylinders,GasTankCapacity,StartType");
 			writer.newLine();
 
 			// Adds products to CSV file
