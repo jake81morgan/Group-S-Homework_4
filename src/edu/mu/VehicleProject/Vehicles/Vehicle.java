@@ -118,14 +118,5 @@ public abstract class Vehicle {
 				+ ", cylinders=" + cylinders + ", gasTankCapacity=" + gasTankCapacity + ", startType=" + startType
 				+ "]";
 	}
-	
-	
-	
-	
-	
-	
-
-	
-	
 
 }

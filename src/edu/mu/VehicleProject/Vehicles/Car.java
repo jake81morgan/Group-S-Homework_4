@@ -7,13 +7,14 @@ import edu.mu.VehicleProject.enums.StartMechanism;
 import edu.mu.VehicleProject.enums.VehicleColor;
 
 public class Car extends Vehicle{
-
-
+	// Constructor
 	public Car(String brand, String make, long modelYear, double price, VehicleColor color, FuelType fuelType,
 			double mileage, double mass, int cylinders, double gasTankCapacity, StartMechanism startType) {
 		super(brand, make, modelYear, price, color, fuelType, mileage, mass, cylinders, gasTankCapacity, startType);
 	}
 
+	
+	// Inherited methods
 	@Override
 	public double calculateMaintenaceCost(double distance) {
 		double maintenanceCost = distance * this.mass * (Year.now().getValue() - this.modelYear) * this.cylinders * 0.0005;
@@ -33,7 +34,12 @@ public class Car extends Vehicle{
 	}
 	
 	
-	
-	
+	// toString implementation
+	@Override
+	public String toString() {
+		return "Car [brand=" + brand + ", make=" + make + ", modelYear=" + modelYear + ", price=" + price + ", color="
+				+ color + ", fuelType=" + fuelType + ", mileage=" + mileage + ", mass=" + mass + ", cylinders="
+				+ cylinders + ", gasTankCapacity=" + gasTankCapacity + ", startType=" + startType + "]";
+	}
 
 }
